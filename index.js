@@ -63,3 +63,5 @@ app.listen(port, () => {
 }); //listen to port
 
 //npm run start-dev
+
+//gitignore node modules
