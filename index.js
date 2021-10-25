@@ -1,6 +1,11 @@
 const express = require('express'); //express import required
+const cors = require('cors');
 const app = express();//call the express
-const port = process.env.PORT || 3000; //set the port via environment variable or localhost 3000 or any 4 digit number as port.
+
+app.use(cors());
+app.use(express.json());
+
+const port = process.env.PORT || 5000; //set the port via environment variable or localhost 3000 or any 4 digit number as port.
 
 app.get('/', (req, res) => {
     res.send("Hello World. Welcome to the World of Node Js. Peace. Have A Great Day!!!")
@@ -27,6 +32,17 @@ app.get('/users', (req, res) => {
     }
 });
 
+//app.METHOD
+app.post('/users', (req, res) => {
+    const newUser = req.body;
+    newUser.id = users.length;
+    users.push(newUser);
+    console.log('hitting the post', req.body)
+    // res.send(JSON.stringify(newUser))
+    res.json(newUser)
+})
+
+
 //dynamic api
 app.get('/users/:id', (req, res) => {
     const id = req.params.id;
@@ -46,4 +62,4 @@ app.listen(port, () => {
     console.log("Listening to port", port);
 }); //listen to port
 
-//run nodemon index.js cli
+//npm run start-dev
